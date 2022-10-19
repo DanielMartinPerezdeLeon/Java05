@@ -2,6 +2,9 @@
 package Vista;
 
 import Controlador.Conectarse;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -9,12 +12,18 @@ import Controlador.Conectarse;
  */
 public class JframePrincipal extends javax.swing.JFrame {
 
+    Conectarse c =  new Conectarse();
     
     public JframePrincipal() {
         initComponents();
-        
-        Conectarse c =  new Conectarse();
-        
+
+        int modo = 0; //Sin conectar usuario
+
+    }
+    
+    public void actualizarPanel(javax.swing.JPanel panel){
+        this.setContentPane(panel);
+        pack();
     }
 
 
@@ -23,6 +32,7 @@ public class JframePrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         botonconectarse = new javax.swing.JButton();
+        botondesconectarse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -33,29 +43,45 @@ public class JframePrincipal extends javax.swing.JFrame {
             }
         });
 
+        botondesconectarse.setText("Desconectarse");
+        botondesconectarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botondesconectarseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(147, 147, 147)
+                .addGap(79, 79, 79)
                 .addComponent(botonconectarse)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addGap(61, 61, 61)
+                .addComponent(botondesconectarse)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(botonconectarse)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addGap(124, 124, 124)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonconectarse)
+                    .addComponent(botondesconectarse))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonconectarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonconectarseActionPerformed
-        // TODO add your handling code here:
+        IniciarSesionPanel panel = new IniciarSesionPanel(c);
+        actualizarPanel(panel);
     }//GEN-LAST:event_botonconectarseActionPerformed
+
+    private void botondesconectarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botondesconectarseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botondesconectarseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -94,5 +120,6 @@ public class JframePrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonconectarse;
+    private javax.swing.JButton botondesconectarse;
     // End of variables declaration//GEN-END:variables
 }

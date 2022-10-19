@@ -40,11 +40,12 @@ public class CrearTablas {
 
       Statement stmt = con.createStatement();
       String tablajugador= "create table jugador("
-              + " codigo varchar(10) not null primary key,"
+              + " codigo numeric(3) not null primary key,"
               + " nombre varchar(20),"
               + " apellido varchar(40),"
               + " beneficioTotal numeric,"
-              + " contraseña varchar(20)"
+              + " contraseña varchar(20),"
+              + " imagen varchar(40)"
               + ")";
      
       stmt.execute(tablajugador);
@@ -52,13 +53,13 @@ public class CrearTablas {
         
         
 
-        //CREA TABLA TROFEO
+        //CREA TABLA TROFEOjdbc:derby://localhost:1527/p05 [p05 on P05]
 
       String tablatrofeo= "create table trofeo("
               + " identificador numeric(3) not null primary key,"
               + " nombre varchar(20),"
               + " importe numeric,"
-              + " jugadorPropietario varchar(10)"
+              + " jugadorPropietario numeric(3)"
               + ")";
      
       stmt.execute(tablatrofeo);
@@ -66,11 +67,19 @@ public class CrearTablas {
       
       
     stmt = con.createStatement();   
-    String creafk= ("alter table trofeo add constraint FKtrofeo foreign key (jugadorPropietario) references jugador(dni)");
+    String creafk= ("alter table trofeo add constraint FKtrofeo foreign key (jugadorPropietario) references jugador(codigo)");
     
     stmt.execute(creafk);
     System.out.println("FK creada");
         
+    
+    
+    
+    String insert=    "INSERT INTO jugador VALUES (100,'Manuel','Perez',0,'Manuel','../fotos/1001.jpg')";
+    stmt.execute(insert);
+    
+    insert=    "INSERT INTO jugador VALUES (101,'Antonio','Castillo',0,'Antonio','../fotos/1002..jpg')";
+    stmt.execute(insert);
         
       stmt.close();
       con.close();

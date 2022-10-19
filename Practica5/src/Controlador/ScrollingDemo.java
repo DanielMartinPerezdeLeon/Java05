@@ -12,13 +12,14 @@ import java.sql.*;
 import java.io.*;
 
 public class ScrollingDemo {
+    
   public static void main(String[] args) {
     Connection conn = null;
     Statement stmt = null;
     ResultSet rset = null;
 
     try {
-      conn = Conectarse.getConnection();
+    // conn = Conectarse.getConnection();
       /* Los resultSet puede ser (Primer par�metro de createStatement):
          - Por defecto (lineal o no arrastable / Sólo hacia adelante) -> ResultSet.TYPE_FORWARD_ONLY
          - Insensible a los cambios de la BDs -> ResultSet.TYPE_SCROLL_INSENSITIVE 
