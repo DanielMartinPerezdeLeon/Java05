@@ -6,6 +6,8 @@
 package Vista;
 
 import Controlador.Conectarse;
+import Controlador.Modo;
+import Modelo.Jugador;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -25,26 +27,38 @@ public class IniciarSesionPanel extends javax.swing.JPanel {
      * Creates new form IniciarSesionPanel
      */
     Conectarse c;
-    public IniciarSesionPanel(Conectarse con) {
+    public IniciarSesionPanel() {
         initComponents();
-        c=con;
+
     }
     
-    public void buscarUsuario(String codigo, String contra){
+    public void buscarUsuario(String codigo, String contra) {
         try {
-           
-            
-            Statement stmt = c.getConn().createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM jugador WHERE codigo = " + codigo + " AND contraseña = " + contra);
+
+            Statement stmt = Conectarse.getConect().getConn().createStatement();
+            // + " AND contraseña = " + contra
+            ResultSet rs = stmt.executeQuery("SELECT * FROM jugador WHERE (codigo = " + codigo + " AND contraseña = " + "'" + contra + "'" + ")");
             ResultSetMetaData rsmd = rs.getMetaData();
             int numCols = rsmd.getColumnCount();
-            
-            while (rs.next()) {
+
+            if (rs.next() == false) {
+                System.err.println("Error");
+
+            } else {
+                String[] datos = new String[6];
+                //Comprobar existe
                 for (int i = 1; i <= numCols; i++) {
-                    System.out.print(rs.getString(i) + " ");
+                    // System.out.print(rs.getString(i) + " ");
+                    datos[i - 1] = rs.getString(i);
+
                 }
-                System.out.println("");
-            } } catch (SQLException ex) {
+
+                Jugador j = new Jugador(Integer.parseInt(datos[0]), datos[1], datos[2], Float.valueOf(datos[3]), datos[4]);
+                System.out.println(j.getNombre());
+
+            }
+
+        } catch (SQLException ex) {
             Logger.getLogger(IniciarSesionPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

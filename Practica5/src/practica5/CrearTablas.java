@@ -60,6 +60,7 @@ public class CrearTablas {
               + " nombre varchar(20),"
               + " importe numeric,"
               + " jugadorPropietario numeric(3)"
+              + " fecha date"
               + ")";
      
       stmt.execute(tablatrofeo);
@@ -75,10 +76,10 @@ public class CrearTablas {
     
     
     
-    String insert=    "INSERT INTO jugador VALUES (100,'Manuel','Perez',0,'Manuel','../fotos/1001.jpg')";
+    String insert=    "INSERT INTO jugador VALUES (100,'Manuel','Perez',0,'100','../fotos/1001.jpg')";
     stmt.execute(insert);
     
-    insert=    "INSERT INTO jugador VALUES (101,'Antonio','Castillo',0,'Antonio','../fotos/1002..jpg')";
+    insert=    "INSERT INTO jugador VALUES (101,'Antonio','Castillo',0,'101','../fotos/1002..jpg')";
     stmt.execute(insert);
         
       stmt.close();

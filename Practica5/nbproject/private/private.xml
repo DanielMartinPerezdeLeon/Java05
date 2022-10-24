@@ -5,6 +5,12 @@
         <group>
             <file>file:/home/alumno/Documentos/DanielMartin/Practica5/src/Vista/JframePrincipal.java</file>
             <file>file:/home/alumno/Documentos/DanielMartin/Practica5/src/Controlador/Conectarse.java</file>
+            <file>file:/home/alumno/Documentos/DanielMartin/Practica5/src/Modelo/Trofeo.java</file>
+            <file>file:/home/alumno/Documentos/DanielMartin/Practica5/src/Vista/IniciarSesionPanel.java</file>
+            <file>file:/home/alumno/Documentos/DanielMartin/Practica5/src/Controlador/Modo.java</file>
+            <file>file:/home/alumno/Documentos/DanielMartin/Practica5/src/Vista/VisualUnoAUno.java</file>
+            <file>file:/home/alumno/Documentos/DanielMartin/Practica5/src/Modelo/Jugador.java</file>
+            <file>file:/home/alumno/Documentos/DanielMartin/Practica5/src/Controlador/ScrollingDemo.java</file>
             <file>file:/home/alumno/Documentos/DanielMartin/Practica5/src/practica5/CrearTablas.java</file>
         </group>
     </open-files>

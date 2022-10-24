@@ -4,12 +4,13 @@ import java.sql.*;
 
 public class Conectarse {
 
-    private Connection conn;
+    private static  Conectarse conect = new Conectarse();
+    private  Connection conn;
     
     
     public Conectarse() {
         //CARGAR DRIVERS
-        try {
+            try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
 
         } catch (Exception e) {
@@ -26,6 +27,10 @@ public class Conectarse {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+    
+    public static Conectarse getConect(){
+        return conect;
     }
 
     public Connection getConn() {

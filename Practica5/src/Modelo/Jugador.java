@@ -24,6 +24,10 @@ public class Jugador {
         this.beneficioTotal = beneficioTotal;
         this.contraseña = contraseña;
     }
+    
+    public Jugador(){
+        
+    }
 
     //CodigoJug
     public int getCodigoJug() {
