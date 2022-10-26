@@ -53,8 +53,9 @@ public class IniciarSesionPanel extends javax.swing.JPanel {
 
                 }
 
-                Jugador j = new Jugador(Integer.parseInt(datos[0]), datos[1], datos[2], Float.valueOf(datos[3]), datos[4]);
-                System.out.println(j.getNombre());
+                Jugador.setUsuario(new Jugador(Integer.parseInt(datos[0]), datos[1], datos[2], Float.valueOf(datos[3]), datos[4]));
+                System.out.println(Jugador.getUsuario().getNombre());
+                JframePrincipal.cambiarBotones();
 
             }
 

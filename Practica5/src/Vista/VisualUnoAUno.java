@@ -5,25 +5,71 @@
  */
 package Vista;
 
+import Controlador.sqlActualizarTrofeo;
+import Controlador.sqlSelectTrofeoJugador;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author alumno
  */
-public class VisualUnoAUno extends javax.swing.JPanel {
+public class VisualUnoAUno extends javax.swing.JPanel{
 
     /**
      * Creates new form VisualUnoAUno
      */
+    
+    sqlSelectTrofeoJugador sql = new sqlSelectTrofeoJugador();
+    ResultSet resultadosql;
+    
     public VisualUnoAUno() {
         initComponents();
         
         
         
-        botonAnterior.setVisible(false);
+        resultadosql=sql.crear();
+        Date date = new Date(1,1,1);
+        
+        
+        
+        try {
+            actualizarDatos();
+            botonAnterior.setEnabled(false);
+            txtmodificar.setVisible(false);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(VisualUnoAUno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+
         
     }
     
-    
+    public void actualizarDatos() throws SQLException{
+        String datos[]= new String[5];
+        
+        datos[0]=Integer.toString(resultadosql.getInt(1));
+            datos[1]=resultadosql.getString(2);
+            datos[2]=Integer.toString(resultadosql.getInt(3));
+            //datos[3]=resultadosql.getDate(5);
+            datos[3]=resultadosql.getDate(5).toString();
+            
+            
+            txtCodigo.setText(datos[0]);
+            txtNombre.setText(datos[1]);
+            txtImporte.setText(datos[2]);
+            txtDate.setText(datos[3]);
+    }
     
 
     /**
@@ -42,19 +88,23 @@ public class VisualUnoAUno extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtNombre = new javax.swing.JTextPane();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txtJugador = new javax.swing.JTextPane();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtImporte = new javax.swing.JTextPane();
         txtFecha = new javax.swing.JScrollPane();
-        jTextPane5 = new javax.swing.JTextPane();
+        txtDate = new javax.swing.JTextPane();
         jLabel5 = new javax.swing.JLabel();
+        txtmodificar = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         botonAnterior = new javax.swing.JButton();
         BotonSiguiente = new javax.swing.JButton();
         botonModificar = new javax.swing.JButton();
+
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         jLabel1.setText("Codigo");
 
@@ -64,17 +114,15 @@ public class VisualUnoAUno extends javax.swing.JPanel {
 
         jScrollPane2.setViewportView(txtNombre);
 
-        jLabel3.setText("Jugador");
-
-        jScrollPane3.setViewportView(txtJugador);
-
         jLabel4.setText("Importe");
 
         jScrollPane4.setViewportView(txtImporte);
 
-        txtFecha.setViewportView(jTextPane5);
+        txtFecha.setViewportView(txtDate);
 
         jLabel5.setText("Fecha");
+
+        txtmodificar.setText("Escriba en los campos el nuevo importe y fecha y vuel a pulsar modificar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,58 +130,50 @@ public class VisualUnoAUno extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtmodificar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel5)
                                 .addComponent(jLabel4))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel2)
-                                .addComponent(jLabel3)
                                 .addComponent(jLabel1)))
+                        .addGap(172, 172, 172)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(107, 107, 107)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(202, 202, 202)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addGap(24, 24, 24)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(36, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(50, 50, 50))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel2)
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel4)
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(txtmodificar)
+                .addContainerGap())
         );
 
         botonAnterior.setText("Anterior");
@@ -151,6 +191,11 @@ public class VisualUnoAUno extends javax.swing.JPanel {
         });
 
         botonModificar.setText("Modificar");
+        botonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -161,7 +206,7 @@ public class VisualUnoAUno extends javax.swing.JPanel {
                 .addComponent(botonAnterior)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonModificar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(77, 77, 77)
                 .addComponent(BotonSiguiente)
                 .addContainerGap())
         );
@@ -180,36 +225,101 @@ public class VisualUnoAUno extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(32, 32, 32)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnteriorActionPerformed
-        // TODO add your handling code here:
+        resultadosql=sql.anterior();
+        try {
+            actualizarDatos();
+        } catch (SQLException ex) {
+            Logger.getLogger(VisualUnoAUno.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        
-        
+        try {
+            if(resultadosql.isFirst()){
+                botonAnterior.setEnabled(false);
+            }
+            BotonSiguiente.setEnabled(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(VisualUnoAUno.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonAnteriorActionPerformed
 
     private void BotonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSiguienteActionPerformed
-        // TODO add your handling code here:
+       resultadosql= sql.siguiente();
+        try {
+            actualizarDatos();
+        } catch (SQLException ex) {
+            Logger.getLogger(VisualUnoAUno.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+     
+        try {
+            if(resultadosql.isLast()){
+                BotonSiguiente.setEnabled(false);
+            }
+            botonAnterior.setEnabled(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(VisualUnoAUno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
         
     }//GEN-LAST:event_BotonSiguienteActionPerformed
+
+    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
+      
+        if(!txtmodificar.isVisible()){
+            txtmodificar.setVisible(true);
+    }else{
+            txtmodificar.setVisible(true);
+            try {
+                String[] fecha = new String[3];
+                fecha = txtDate.getText().split("-",3);
+                System.out.println(fecha[0] +fecha[1]+ fecha[2]);
+                Date date =  new Date(Integer.valueOf(fecha[1]),Integer.valueOf(fecha[2]),Integer.valueOf(fecha[0]));
+                
+                sqlActualizarTrofeo.ActualizarTrofeo(resultadosql.getInt(1),Integer.valueOf(txtImporte.getText()), fecha[1]+"/"+fecha[2]+"/"+fecha[0]);
+                
+                resultadosql=sql.crear();
+        
+        
+        
+        try {
+            actualizarDatos();
+            botonAnterior.setEnabled(false);
+            txtmodificar.setVisible(false);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(VisualUnoAUno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            } catch (SQLException ex) {
+                Logger.getLogger(VisualUnoAUno.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_botonModificarActionPerformed
+
+   
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+
+    }//GEN-LAST:event_formKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -218,20 +328,20 @@ public class VisualUnoAUno extends javax.swing.JPanel {
     private javax.swing.JButton botonModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextPane jTextPane5;
     private javax.swing.JTextPane txtCodigo;
+    private javax.swing.JTextPane txtDate;
     private javax.swing.JScrollPane txtFecha;
     private javax.swing.JTextPane txtImporte;
-    private javax.swing.JTextPane txtJugador;
     private javax.swing.JTextPane txtNombre;
+    private javax.swing.JLabel txtmodificar;
     // End of variables declaration//GEN-END:variables
 }
+
+

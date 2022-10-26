@@ -59,7 +59,7 @@ public class CrearTablas {
               + " identificador numeric(3) not null primary key,"
               + " nombre varchar(20),"
               + " importe numeric,"
-              + " jugadorPropietario numeric(3)"
+              + " jugadorPropietario numeric(3),"
               + " fecha date"
               + ")";
      
@@ -82,6 +82,12 @@ public class CrearTablas {
     insert=    "INSERT INTO jugador VALUES (101,'Antonio','Castillo',0,'101','../fotos/1002..jpg')";
     stmt.execute(insert);
         
+    insert=    "INSERT INTO trofeo VALUES (100,'supercopa',200,100,'5/12/2001')";
+    stmt.execute(insert);
+    
+    insert=    "INSERT INTO trofeo VALUES (101,'ultracopa',150,100,'7/10/2020')";
+    stmt.execute(insert);
+    
       stmt.close();
       con.close();
 

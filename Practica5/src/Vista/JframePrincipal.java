@@ -14,12 +14,9 @@ import java.util.logging.Logger;
 
 public class JframePrincipal extends javax.swing.JFrame {
 
-    Integer modo = 0; //No se ha iniciado sesion;
 
     public JframePrincipal() {
         initComponents();
-
-        System.out.println("a");
 
         botondesconectarsesion.setEnabled(true);
         botoniniciarsesion.setEnabled(true);
@@ -31,7 +28,7 @@ public class JframePrincipal extends javax.swing.JFrame {
         pack();
     }
 
-    public void cambiarBotones() {
+    public static void cambiarBotones() {
         if (botondesconectarsesion.isEnabled() == false) {
             botondesconectarsesion.setEnabled(true);
             botoniniciarsesion.setEnabled(false);
@@ -47,12 +44,31 @@ public class JframePrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        botondesconectarse = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         botoniniciarsesion = new javax.swing.JMenuItem();
         botondesconectarsesion = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        botonvisualuno = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jMenu3.setText("Conexion");
+
+        botondesconectarse.setText("Conectarse a la base de datos");
+        botondesconectarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botondesconectarseActionPerformed(evt);
+            }
+        });
+        jMenu3.add(botondesconectarse);
+
+        jMenuItem2.setText("Desconectarse de la base de datos");
+        jMenu3.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu3);
 
         jMenu1.setText("Sesion");
 
@@ -69,7 +85,16 @@ public class JframePrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Visualizar");
+
+        botonvisualuno.setText("Uno a uno");
+        botonvisualuno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonvisualunoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(botonvisualuno);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -93,6 +118,15 @@ public class JframePrincipal extends javax.swing.JFrame {
         actualizarPanel(panel);
         
     }//GEN-LAST:event_botoniniciarsesionActionPerformed
+
+    private void botondesconectarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botondesconectarseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botondesconectarseActionPerformed
+
+    private void botonvisualunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonvisualunoActionPerformed
+        VisualUnoAUno panel = new VisualUnoAUno();
+        actualizarPanel(panel);
+    }//GEN-LAST:event_botonvisualunoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,10 +164,14 @@ public class JframePrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem botondesconectarsesion;
-    private javax.swing.JMenuItem botoniniciarsesion;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem botondesconectarse;
+    private static javax.swing.JMenuItem botondesconectarsesion;
+    private static javax.swing.JMenuItem botoniniciarsesion;
+    private javax.swing.JMenuItem botonvisualuno;
+    private static javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,7 +10,10 @@ package Modelo;
  * @author carlo
  */
 public class Jugador {
-
+    
+    private static Jugador usuario;
+    
+    
     private int codigoJug;
     private String nombre;
     private String apellido;
@@ -74,4 +77,14 @@ public class Jugador {
         this.contraseña = contraseña;
     }
 
+    public static Jugador getUsuario() {
+        return usuario;
+    }
+
+    public static void setUsuario(Jugador usuario) {
+        Jugador.usuario = usuario;
+    }
+
+    
+    
 }
