@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class Conectarse {
 
-    private static  Conectarse conect = new Conectarse();
+    private static  Conectarse conect;
     private  Connection conn;
     
     
@@ -32,6 +32,10 @@ public class Conectarse {
     public static Conectarse getConect(){
         return conect;
     }
+    
+    public static void CrearConexion() {
+        conect=new Conectarse();
+    }
 
     public Connection getConn() {
         return conn;
@@ -43,6 +47,7 @@ public class Conectarse {
     public static void close(ResultSet rs) {
         try {
             rs.close();
+            System.out.println("Desconectado");
         } catch (Exception ignored) {
         }
     }
@@ -60,6 +65,8 @@ public class Conectarse {
         } catch (Exception ignored) {
         }
     }
+
+    
     
     
     

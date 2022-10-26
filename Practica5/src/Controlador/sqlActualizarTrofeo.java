@@ -20,7 +20,7 @@ public class sqlActualizarTrofeo {
     public static void ActualizarTrofeo(int trofeo, int nuevoimporte, String nuevafecha){
         Statement stmt;
         
-        System.out.println(nuevafecha.toString());
+
         try {
             stmt = Conectarse.getConect().getConn().createStatement();
             
@@ -31,7 +31,7 @@ public class sqlActualizarTrofeo {
      
             stmt.executeUpdate(actualizar);
             
-        System.out.println("trofeoActualizado");
+        System.out.println("trofeo Actualizado");
         } catch (SQLException ex) {
             Logger.getLogger(sqlActualizarTrofeo.class.getName()).log(Level.SEVERE, null, ex);
         }

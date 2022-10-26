@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.DatePicker;
 
 /**
  *
@@ -54,7 +55,7 @@ public class IniciarSesionPanel extends javax.swing.JPanel {
                 }
 
                 Jugador.setUsuario(new Jugador(Integer.parseInt(datos[0]), datos[1], datos[2], Float.valueOf(datos[3]), datos[4]));
-                System.out.println(Jugador.getUsuario().getNombre());
+                System.out.println("Conectado como " + Jugador.getUsuario().getNombre());
                 JframePrincipal.cambiarBotones();
 
             }
@@ -154,7 +155,7 @@ public class IniciarSesionPanel extends javax.swing.JPanel {
         buscarUsuario(codigo,contra);
     }//GEN-LAST:event_botonaceptarActionPerformed
 
-
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonaceptar;
     private javax.swing.JTextPane contraseñapanel;
