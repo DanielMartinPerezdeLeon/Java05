@@ -76,10 +76,10 @@ public class CrearTablas {
     
     
     
-    String insert=    "INSERT INTO jugador VALUES (100,'Manuel','Perez',0,'100','../fotos/1001.jpg')";
+    String insert=    "INSERT INTO jugador VALUES (100,'Manuel','Perez',0,'100','1001')";
     stmt.execute(insert);
     
-    insert=    "INSERT INTO jugador VALUES (101,'Antonio','Castillo',0,'101','../fotos/1002..jpg')";
+    insert=    "INSERT INTO jugador VALUES (101,'Antonio','Castillo',0,'101','1002')";
     stmt.execute(insert);
         
     insert=    "INSERT INTO trofeo VALUES (100,'supercopa',200,100,'5/12/2001')";

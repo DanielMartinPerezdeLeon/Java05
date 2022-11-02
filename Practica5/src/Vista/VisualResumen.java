@@ -7,6 +7,7 @@ package Vista;
 import Controlador.sqlCalculoBeneficio;
 import Controlador.sqlSelectDatosJugador;
 import Controlador.sqlSelectTrofeoJugador;
+import Modelo.Jugador;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -27,7 +28,7 @@ public class VisualResumen extends javax.swing.JPanel {
     public VisualResumen() {
         initComponents();
 
-        resultadosql = sqlDatos.crear();
+
 
         try {
             actualizarDatosUsuario();
@@ -37,36 +38,37 @@ public class VisualResumen extends javax.swing.JPanel {
             Logger.getLogger(VisualUnoAUno.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void actualizarDatosLista() {
         String datos[] = new String[5];
         String[] trofeo = new String[10];
-        int indice=0;
-        
+        int indice = 0;
+
         trofeosql = sqlTrofeos.crear();
-        
+
         try {
-            for(trofeosql=sqlTrofeos.crear() ; !trofeosql.isAfterLast() ; trofeosql=sqlTrofeos.siguiente()){
-                
+            for (trofeosql = sqlTrofeos.crear(); !trofeosql.isAfterLast(); trofeosql = sqlTrofeos.siguiente()) {
+
                 datos[0] = Integer.toString(trofeosql.getInt(1));
                 datos[1] = trofeosql.getString(2);
                 datos[2] = Integer.toString(trofeosql.getInt(3));
                 datos[3] = trofeosql.getDate(5).toString();
-                
-                trofeo[indice] = (datos[0]+" | "+datos[1]+" | "+datos[2]+" | "+datos[3]);
-                System.out.println(trofeo);
+
+                trofeo[indice] = (datos[0] + " | " + datos[1] + " | " + datos[2] + " | " + datos[3]);
                 indice++;
-                
+
                 listaTrofeos.setListData(trofeo);
             }
-        
+
         } catch (SQLException ex) {
             Logger.getLogger(VisualResumen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     private void actualizarDatosUsuario() throws SQLException {
+        resultadosql = sqlDatos.crear();
+        
         String datos[] = new String[5];
 
         datos[0] = Integer.toString(resultadosql.getInt(1));
@@ -83,8 +85,13 @@ public class VisualResumen extends javax.swing.JPanel {
     }
 
     public String rutaImagen(String imagen) {
+        //Controlar si es windows o linux
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            return (".\\fotos" + imagen + ".jpg");
+        } else {
+            return ("./fotos/" + imagen + ".jpg");
+        }
 
-        return (".\\fotos\\" + imagen + ".jpg");
     }
 
     /**
@@ -185,7 +192,7 @@ public class VisualResumen extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(198, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonCalculo)
                 .addGap(196, 196, 196))
         );
@@ -199,18 +206,19 @@ public class VisualResumen extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(listaTrofeos);
 
+        txtFoto.setIcon(new javax.swing.ImageIcon("/home/alumno/Documentos/DanielMartin/Practica5/fotos/1001.jpg")); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 45, Short.MAX_VALUE)
-                        .addComponent(txtFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                .addComponent(txtFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +226,7 @@ public class VisualResumen extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                .addComponent(txtFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -234,7 +242,7 @@ public class VisualResumen extends javax.swing.JPanel {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 2, Short.MAX_VALUE)))
+                        .addGap(23, 23, 23)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -252,17 +260,15 @@ public class VisualResumen extends javax.swing.JPanel {
     private void botonCalculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCalculoActionPerformed
 
         try {
-            sqlCalculoBeneficio.ActualizarUsuario(resultadosql.getInt(1));
+            sqlCalculoBeneficio.ActualizarUsuario(Jugador.getUsuario().getCodigoJug());
 
-            try {
-                actualizarDatosUsuario();
+            actualizarDatosUsuario();
+            
 
-            } catch (SQLException ex) {
-                Logger.getLogger(VisualUnoAUno.class.getName()).log(Level.SEVERE, null, ex);
-            }
         } catch (SQLException ex) {
             Logger.getLogger(VisualUnoAUno.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_botonCalculoActionPerformed
 
 
@@ -284,5 +290,4 @@ public class VisualResumen extends javax.swing.JPanel {
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
-    
 }

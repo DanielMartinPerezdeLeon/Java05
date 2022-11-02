@@ -2,31 +2,16 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
+    <Component class="javax.swing.JMenuItem" name="jMenuItem1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+      </Properties>
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Conexion"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="botondesconectarse">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Conectarse a la base de datos"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botondesconectarseActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Desconectarse de la base de datos"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Sesion"/>
+            <Property name="text" type="java.lang.String" value="Conectarse"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
@@ -34,7 +19,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="botoniniciarsesion">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Iniciar Sesion"/>
+                <Property name="text" type="java.lang.String" value="Conectarse/iniciar sesion"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botoniniciarsesionActionPerformed"/>
@@ -47,6 +32,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Desconectarse"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botondesconectarsesionActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
               </AuxValues>
@@ -60,7 +48,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="botonvisualuno">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Uno a uno"/>
+                <Property name="text" type="java.lang.String" value="Trofeos"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonvisualunoActionPerformed"/>
@@ -68,13 +56,21 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="botonVisualResumen">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Resumen"/>
+                <Property name="text" type="java.lang.String" value="Resumen Jugador"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonVisualResumenActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Acerca de"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu3MouseClicked"/>
+          </Events>
         </Menu>
       </SubComponents>
     </Menu>

@@ -18,21 +18,31 @@ import java.util.logging.Logger;
  */
 public class sqlCalculoBeneficio {
 
+    
     public static void ActualizarUsuario(int usuario) {
-        Statement stmt;
-        ResultSet datossql;
-
+ 
         try {
-            stmt = Conectarse.getConect().getConn().createStatement();
+           
+            Connection conn = Conectarse.getConect().getConn();
 
-            String sql = "SELECT sum(importe) FROM trofeo "
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+      
+            String sql =" SELECT sum(importe) FROM trofeo "
                     + "WHERE jugadorPropietario = " + usuario;
             
-            stmt.execute(sql);
+            ResultSet rset = stmt.executeQuery(sql);
+            
+            rset.first();
+            int rs = rset.getInt(1);
+            
+
 
             String actualizar = "update jugador "
-                    + "set beneficioTotal = (" + sql
+                    + "set beneficioTotal = (" + rs
                     + ") where codigo = " + usuario;
+            
 
             stmt.executeUpdate(actualizar);
 
